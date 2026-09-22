@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>يستاهل</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 40px; background: #ede7f6; }
+    h2 { color: #6200ea; }
+    a { color: #6200ea; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <h2>يستاهل</h2>
+  <p>جارٍ فتح التطبيق...</p>
+  <p id="fallback" style="display:none">
+    حمّل التطبيق:<br/><br/>
+    <a href="https://apps.apple.com/us/app/two-rooms-and-one-blast/id6784425628">App Store (iOS)</a><br/><br/>
+    <a href="https://play.google.com/store/apps/details?id=com.rzs.tworoomsandaboom">Google Play (Android)</a>
+  </p>
+  <script>
+    var params  = new URLSearchParams(window.location.search);
+    var type    = params.get('type');    // 'restaurant' or 'meal'
+    var id      = params.get('id');      // eng_name
+    var section = params.get('section');
+    var mealId  = params.get('mealId');
+
+    var deepLink = type === 'meal'
+      ? 'tworooms://meal/' + id + '/' + section + '/' + mealId
+      : 'tworooms://restaurant/' + id;
+
+    var isIOS     = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    var isAndroid = /Android/.test(navigator.userAgent);
+
+    var storeUrl = isIOS
+      ? 'https://apps.apple.com/us/app/two-rooms-and-one-blast/id6784425628'
+      : 'https://play.google.com/store/apps/details?id=com.rzs.tworoomsandaboom';
+
+    // Try deep link; show fallback after 1.5s if app not installed
+    window.location = deepLink;
+    setTimeout(function () {
+      document.getElementById('fallback').style.display = 'block';
+      document.querySelector('p:first-of-type').style.display = 'none';
+      // Auto-redirect to store after another 1.5s
+      setTimeout(function () { window.location = storeUrl; }, 1500);
+    }, 1500);
+  </script>
+</body>
+</html>
