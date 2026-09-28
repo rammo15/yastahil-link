@@ -26,15 +26,15 @@
     var mealId  = params.get('mealId');
 
     var deepLink = type === 'meal'
-      ? 'tworooms://meal/' + id + '/' + section + '/' + mealId
-      : 'tworooms://restaurant/' + id;
+      ? 'yastahil://meal/' + id + '/' + section + '/' + mealId
+      : 'yastahil://restaurant/' + id;
 
     var isIOS     = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     var isAndroid = /Android/.test(navigator.userAgent);
 
     var storeUrl = isIOS
-      ? 'https://apps.apple.com/us/app/two-rooms-and-one-blast/id6784425628'
-      : 'https://play.google.com/store/apps/details?id=com.rzs.tworoomsandaboom';
+      ? 'https://apps.apple.com/sa/app/%D9%8A%D8%B3%D8%AA%D8%A7%D9%87%D9%84/id6811217161?l=ar'
+      : 'https://play.google.com/store/apps/details?id=com.rammo.resturantsevaluation';
 
     // Try deep link; show fallback after 1.5s if app not installed
     window.location = deepLink;
